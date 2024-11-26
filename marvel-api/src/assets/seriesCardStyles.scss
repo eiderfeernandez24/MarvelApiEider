@@ -12,7 +12,6 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
   
   .series-card:hover {
@@ -28,10 +27,11 @@
   }
   
   .series-info {
-    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 1;
+    padding: 10px;
   }
   
   .series-card h3 {
@@ -39,6 +39,9 @@
     font-weight: bold;
     color: #ffdd57;
     margin-bottom: 10px;
+    overflow: hidden; /* Para evitar desbordamientos */
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   
   .series-card p {
@@ -46,11 +49,14 @@
     color: #f0f0f0;
     margin: 5px 0;
     line-height: 1.4;
+    max-height: 40px; /* Limita la altura máxima del texto */
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .view-details-btn {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: auto; /* Empuja el botón hacia abajo */
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
@@ -74,4 +80,4 @@
     .series-card p {
       font-size: 13px;
     }
-  }
+  }  

@@ -1,15 +1,18 @@
-/* Estilos generales */
-html,
-body {
-  height: 100%;
+/* Fondo uniforme para todo el cuerpo */
+html, body {
   margin: 0;
-  background-color: #0d1117;
+  padding: 0;
+  height: 100%;
+  background-color: #0d1117; /* Fondo global */
+  color: white;
+  font-family: "Arial", sans-serif;
 }
 
+/* Fondo de la sección serie-details */
 .serie-details {
   text-align: center;
   padding: 30px;
-  background: #0d1117;
+  background: transparent; /* Usa el color del fondo global */
   color: white;
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -17,6 +20,7 @@ body {
   margin: auto;
 }
 
+/* Otros estilos */
 .serie-details h1 {
   font-size: 36px;
   color: #ffdd57;
@@ -33,6 +37,7 @@ body {
   border: 4px solid #ffdd57;
 }
 
+/* Sección de creadores */
 .creators-section {
   margin-top: 30px;
   text-align: center;
@@ -85,12 +90,7 @@ body {
   font-weight: bold;
 }
 
-.loading {
-  font-size: 18px;
-  color: #aaa;
-  margin-top: 20px;
-}
-
+/* Botón de volver */
 .back-btn {
   display: inline-block;
   margin-top: 40px;
