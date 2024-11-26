@@ -1,0 +1,109 @@
+/* Estilos generales */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #0d1117;
+}
+
+.serie-details {
+  text-align: center;
+  padding: 30px;
+  background: #0d1117;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  margin: auto;
+}
+
+.serie-details h1 {
+  font-size: 36px;
+  color: #ffdd57;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.serie-image {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 4px solid #ffdd57;
+}
+
+.creators-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.creators-section h2 {
+  font-size: 24px;
+  color: #ffdd57;
+  margin-bottom: 10px;
+}
+
+/* Lista de creadores */
+.creators-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.creator-card {
+  background-color: #1a1f26;
+  color: white;
+  border: 2px solid #ffdd57;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.creator-card:hover {
+  transform: scale(1.1);
+  background-color: #ffdd57;
+  color: #0d1117;
+}
+
+.creator-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.creator-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.loading {
+  font-size: 18px;
+  color: #aaa;
+  margin-top: 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}

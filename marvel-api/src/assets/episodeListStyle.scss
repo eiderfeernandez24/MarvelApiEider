@@ -1,0 +1,125 @@
+.comic-list {
+    text-align: center;
+    padding: 20px;
+    background: #0d1117; /* Fondo completamente negro */
+    color: white;
+    min-height: 100vh; /* Asegura que ocupa toda la pantalla */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .comic-card-container {
+    display: grid; /* Usamos CSS Grid para organizar las tarjetas */
+    grid-template-columns: repeat(
+      5,
+      1fr
+    ); /* 5 columnas iguales para pantallas grandes */
+    gap: 20px; /* Espaciado entre las tarjetas */
+    justify-items: center; /* Centrar las tarjetas dentro de cada columna */
+    margin-top: 20px; /* Espaciado superior */
+  }
+  
+  /* Ajustes responsivos utilizando media queries */
+  @media (max-width: 1200px) {
+    .comic-card-container {
+      grid-template-columns: repeat(
+        4,
+        1fr
+      ); /* 4 columnas en pantallas medianas */
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .comic-card-container {
+      grid-template-columns: repeat(
+        3,
+        1fr
+      ); /* 3 columnas en pantallas pequeñas */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .comic-card-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .comic-card-container {
+      grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+    }
+  }
+  
+  .load-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* Eliminar subrayado del enlace */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .load-more-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px); /* Efecto hover: botón se eleva ligeramente */
+  }
+  
+  .comic-list h1 {
+    font-size: 28px;
+    color: #ffdd57; /* Amarillo para mantener consistencia */
+    margin-bottom: 20px;
+  }
+  
+  .comic-card {
+    background-color: #1e272e; /* Fondo oscuro para las tarjetas */
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 220px; /* Ancho fijo para las tarjetas */
+    height: 350px; /* Altura fija para las tarjetas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+  
+  .comic-card:hover {
+    transform: translateY(-10px); /* Efecto hover: tarjeta se eleva */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+  }
+  
+  .comic-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0; /* Bordes redondeados superiores */
+    transition: transform 0.3s ease;
+  }
+  
+  .comic-card img:hover {
+    transform: scale(1.05); /* Efecto zoom al pasar el ratón sobre la imagen */
+  }
+  
+  .comic-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffdd57; /* Color amarillo para destacar */
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  p {
+    color: #ccc; /* Texto gris claro */
+    font-size: 16px;
+    padding-top: 20px;
+  }
