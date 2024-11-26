@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import EpisodeList from "@/pages/EpisodeList.vue";
-import CreatorsView from "@/views/CreatorsView.vue";
-import CreatorDetail from "@/views/CreatorDetail.vue";
+import CharactersList from "@/pages/CharactersList.vue";
+import CharacterDetails from "@/pages/CharacterDetails.vue";
+import SeriesList from "@/pages/SeriesList.vue";
 
 const routes = [
   {
@@ -15,15 +16,20 @@ const routes = [
     component: EpisodeList,
   },
   {
-    path: "/creators",
-    name: "creators",
-    component: CreatorsView,
+    path: "/characters",
+    name: "characters",
+    component: CharactersList, // Componente de personajes
   },
   {
-    path: "/creator/:id",
-    name: "CreatorDetail",
-    component: CreatorDetail,
-    props: true, // Habilita pasar el `id` como prop
+    path: "/character/:id",
+    name: "characterDetails",
+    component: CharacterDetails,
+    props: true, // Pasa los parámetros de la ruta como props al componente
+  },
+  {
+    path: "/series", // Ruta para las series
+    name: "SeriesList",
+    component: SeriesList, // El componente que muestra la lista de series
   },
 ];
 

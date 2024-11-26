@@ -1,17 +1,17 @@
 <template>
-  <div class="comic-card">
+  <div class="series-card">
     <img
-      :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
-      alt="Comic image"
+      :src="serie.thumbnail.path + '.' + serie.thumbnail.extension"
+      alt="Series image"
     />
-    <h3>{{ comic.title }}</h3>
+    <h3>{{ serie.title }}</h3>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    comic: {
+    serie: {
       type: Object,
       required: true,
     },
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-.comic-card {
+.series-card {
   background-color: #1e272e;
   color: white;
   padding: 15px;
@@ -34,14 +34,14 @@ export default {
   text-align: center;
 }
 
-.comic-card img {
+.series-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
 
-.comic-card h3 {
+.series-card h3 {
   font-size: 18px;
   font-weight: bold;
   color: #ffdd57;
@@ -61,12 +61,12 @@ export default {
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .comic-card {
+  .series-card {
     width: 180px;
     height: 300px;
   }
 
-  .comic-card h3 {
+  .series-card h3 {
     font-size: 16px;
   }
 }

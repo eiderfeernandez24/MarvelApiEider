@@ -1,15 +1,15 @@
 <template>
-  <div class="comic-list">
-    <h1>LISTA DE CÓMICS</h1>
-    <div v-if="comics.length">
-      <!-- Aplicamos el mismo diseño de tarjetas que en la lista de personajes -->
-      <div class="comic-card-container">
-        <ComicCard v-for="comic in comics" :key="comic.id" :comic="comic" />
+  <div class="series-list">
+    <h1>LISTA DE SERIES</h1>
+    <div v-if="series.length">
+      <!-- Aplicamos el mismo diseño de tarjetas para las series -->
+      <div class="series-card-container">
+        <SeriesCard v-for="serie in series" :key="serie.id" :serie="serie" />
       </div>
     </div>
-    <p v-else>Cargando cómics...</p>
-    <button v-if="hasNextPage" @click="loadMoreComics" class="load-more-btn">
-      Cargar más cómics
+    <p v-else>Cargando series...</p>
+    <button v-if="hasNextPage" @click="loadMoreSeries" class="load-more-btn">
+      Cargar más series
     </button>
     <!-- Enlace de volver al inicio -->
     <router-link to="/" class="load-more-btn"> Volver al Inicio </router-link>
@@ -18,63 +18,63 @@
 
 <script>
 import axios from "axios";
-import ComicCard from "../components/ComicCard.vue"; // Componente para mostrar cada cómic
+import SeriesCard from "../components/SeriesCard.vue"; // Componente para mostrar cada serie
 
 export default {
   components: {
-    ComicCard,
+    SeriesCard,
   },
   data() {
     return {
-      comics: [], // Array para almacenar los cómics
+      series: [], // Array para almacenar las series
       publicKey: "40039a88658df0ebef4ab4763898ca93", // Tu clave pública de Marvel
       privateKey: "8e198fb531ca9c933681480119851a819f35a27d", // Tu clave privada de Marvel
       ts: new Date().getTime(), // Timestamp para la autenticación
       hash: "", // El hash se genera en base a ts + privateKey + publicKey
       offset: 0, // Offset inicial para la paginación
-      limit: 10, // Número de cómics por página
-      hasNextPage: true, // Indicador de si hay más cómics para cargar
+      limit: 10, // Número de series por página
+      hasNextPage: true, // Indicador de si hay más series para cargar
     };
   },
   created() {
-    this.fetchComics(); // Llamamos a la función para obtener los cómics al crear el componente
+    this.fetchSeries(); // Llamamos a la función para obtener las series al crear el componente
   },
   methods: {
-    async fetchComics() {
+    async fetchSeries() {
       try {
         const hash = this.generateHash();
 
-        // Realiza la petición a la API de Marvel para obtener los cómics
+        // Realiza la petición a la API de Marvel para obtener las series
         const response = await axios.get(
-          "https://gateway.marvel.com/v1/public/comics",
+          "https://gateway.marvel.com/v1/public/series",
           {
             params: {
               apikey: this.publicKey,
               ts: this.ts,
               hash: hash,
-              limit: this.limit, // Número de cómics a obtener
+              limit: this.limit, // Número de series a obtener
               offset: this.offset, // Offset para la paginación
             },
           }
         );
 
-        const newComics = response.data.data.results;
+        const newSeries = response.data.data.results;
 
-        if (newComics.length > 0) {
-          // Si hay nuevos cómics, los agregamos a la lista existente
-          this.comics = [...this.comics, ...newComics];
+        if (newSeries.length > 0) {
+          // Si hay nuevas series, las agregamos a la lista existente
+          this.series = [...this.series, ...newSeries];
           this.offset += this.limit; // Actualizamos el offset para la siguiente página
         } else {
-          this.hasNextPage = false; // Si no hay más cómics, deshabilitamos el botón
+          this.hasNextPage = false; // Si no hay más series, deshabilitamos el botón
         }
       } catch (error) {
-        console.error("Error fetching comics:", error); // En caso de error, mostramos el error en consola
+        console.error("Error fetching series:", error); // En caso de error, mostramos el error en consola
       }
     },
 
-    loadMoreComics() {
-      // Llamar a la función para cargar más cómics
-      this.fetchComics();
+    loadMoreSeries() {
+      // Llamar a la función para cargar más series
+      this.fetchSeries();
     },
 
     // Método para generar el hash (md5)
@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.comic-list {
+.series-list {
   text-align: center;
   padding: 20px;
   background: #0d1117; /* Fondo completamente negro */
@@ -99,7 +99,7 @@ export default {
   justify-content: flex-start;
 }
 
-.comic-card-container {
+.series-card-container {
   display: grid; /* Usamos CSS Grid para organizar las tarjetas */
   grid-template-columns: repeat(
     5,
@@ -112,7 +112,7 @@ export default {
 
 /* Ajustes responsivos utilizando media queries */
 @media (max-width: 1200px) {
-  .comic-card-container {
+  .series-card-container {
     grid-template-columns: repeat(
       4,
       1fr
@@ -121,7 +121,7 @@ export default {
 }
 
 @media (max-width: 900px) {
-  .comic-card-container {
+  .series-card-container {
     grid-template-columns: repeat(
       3,
       1fr
@@ -130,13 +130,13 @@ export default {
 }
 
 @media (max-width: 600px) {
-  .comic-card-container {
+  .series-card-container {
     grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
   }
 }
 
 @media (max-width: 400px) {
-  .comic-card-container {
+  .series-card-container {
     grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
   }
 }
@@ -162,54 +162,9 @@ export default {
   transform: translateY(-3px); /* Efecto hover: botón se eleva ligeramente */
 }
 
-.comic-list h1 {
+.series-list h1 {
   font-size: 28px;
   color: #ffdd57; /* Amarillo para mantener consistencia */
   margin-bottom: 20px;
-}
-
-.comic-card {
-  background-color: #1e272e; /* Fondo oscuro para las tarjetas */
-  color: white;
-  padding: 15px;
-  border-radius: 10px;
-  width: 220px; /* Ancho fijo para las tarjetas */
-  height: 350px; /* Altura fija para las tarjetas */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-}
-
-.comic-card:hover {
-  transform: translateY(-10px); /* Efecto hover: tarjeta se eleva */
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
-}
-
-.comic-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0; /* Bordes redondeados superiores */
-  transition: transform 0.3s ease;
-}
-
-.comic-card img:hover {
-  transform: scale(1.05); /* Efecto zoom al pasar el ratón sobre la imagen */
-}
-
-.comic-card h3 {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffdd57; /* Color amarillo para destacar */
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-p {
-  color: #ccc; /* Texto gris claro */
-  font-size: 16px;
-  padding-top: 20px;
 }
 </style>
