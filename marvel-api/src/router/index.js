@@ -3,6 +3,7 @@ import EpisodeList from "@/pages/EpisodeList.vue";
 import CharactersList from "@/pages/CharactersList.vue";
 import CharacterDetails from "@/pages/CharacterDetails.vue";
 import SeriesList from "@/pages/SeriesList.vue";
+import SerieDetails from "@/pages/SerieDetails.vue";
 
 const routes = [
   {
@@ -30,6 +31,12 @@ const routes = [
     path: "/series", // Ruta para las series
     name: "SeriesList",
     component: SeriesList, // El componente que muestra la lista de series
+  },
+  {
+    path: "/series/:seriesId/details", // Ruta para los detalles de la serie
+    name: "serieDetails",
+    component: SerieDetails, // Asegúrate de que este sea el componente correcto
+    props: true, // Pasa el parámetro `seriesId` como prop al componente
   },
 ];
 

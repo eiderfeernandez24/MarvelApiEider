@@ -28,7 +28,7 @@
       <h2>¿Qué puedes explorar?</h2>
       <div class="feature-cards">
         <div class="card">
-          <i class="fa fa-video-camera"></i>
+          <i class="fas fa-video"></i>
           <h3>Episodios</h3>
           <p>
             Sumérgete en el catálogo completo de episodios de tus series y
@@ -36,7 +36,7 @@
           </p>
         </div>
         <div class="card">
-          <i class="fa fa-pencil"></i>
+          <i class="fas fa-pencil-alt"></i>
           <h3>Creadores</h3>
           <p>
             Aprende más sobre los genios detrás de las historias y personajes
