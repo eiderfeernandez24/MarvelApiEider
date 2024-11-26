@@ -6,9 +6,6 @@
       :alt="comic.title"
     />
     <h3>{{ comic.title }}</h3>
-    <!-- Descripción del cómic -->
-    <p v-if="comic.description">{{ comic.description }}</p>
-    <p v-else>Sin descripción disponible.</p>
   </div>
 </template>
 

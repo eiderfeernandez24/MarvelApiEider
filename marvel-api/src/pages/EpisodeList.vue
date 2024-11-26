@@ -9,6 +9,7 @@
       Cargar más cómics
     </button>
   </div>
+  <router-link to="/" class="link">Volver al Inicio</router-link>
 </template>
 
 <script>
