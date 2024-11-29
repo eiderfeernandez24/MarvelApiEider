@@ -1,9 +1,10 @@
 <template>
-  <div class="character-card">
+  <div class="character-card col-12 col-sm-6 col-md-4 col-lg-3">
     <!-- Imagen del personaje -->
     <img
       :src="character.thumbnail.path + '.' + character.thumbnail.extension"
       :alt="character.name"
+      class="img-fluid"
     />
     <h3>{{ character.name }}</h3>
 

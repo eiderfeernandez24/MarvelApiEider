@@ -1,83 +1,92 @@
+/* Estilos para las tarjetas */
 .series-card {
-    background-color: #1e272e;
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    width: 230px;
-    height: 400px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+  background-color: #1e272e;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 230px;
+  height: 500px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.series-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para las imágenes */
+.series-card img {
+  width: 100%;
+  height: 200px; /* Altura uniforme */
+  object-fit: cover; /* Ajuste para evitar deformaciones */
+  border-radius: 10px 10px 0 0;
+  background-color: #ccc; /* Fondo de respaldo */
+  display: block; /* Evita que se comporten como inline */
+}
+
+/* Información de la tarjeta */
+.series-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 5px;
+  min-height: 130px; /* Garantiza consistencia */
+}
+
+.series-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffdd57;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+
+.series-card p {
+  font-size: 14px;
+  color: #f0f0f0;
+  margin: 5px 0;
+  line-height: 1.4;
+  max-height: 38px; /* Limita el texto */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botón de detalles */
+.view-details-btn {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 900px) {
+  .series-card {
+    width: 200px;
+    height: 350px;
   }
-  
-  .series-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-  }
-  
-  .series-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-  }
-  
-  .series-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
-    padding: 10px;
-  }
-  
+
   .series-card h3 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffdd57;
-    margin-bottom: 10px;
-    overflow: hidden; /* Para evitar desbordamientos */
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 16px;
   }
-  
+
   .series-card p {
-    font-size: 14px;
-    color: #f0f0f0;
-    margin: 5px 0;
-    line-height: 1.4;
-    max-height: 40px; /* Limita la altura máxima del texto */
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 13px;
   }
-  
-  .view-details-btn {
-    display: inline-block;
-    margin-top: auto; /* Empuja el botón hacia abajo */
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .view-details-btn:hover {
-    text-decoration: underline;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 900px) {
-    .series-card {
-      width: 200px;
-      height: 350px;
-    }
-  
-    .series-card h3 {
-      font-size: 16px;
-    }
-  
-    .series-card p {
-      font-size: 13px;
-    }
-  }  
+}
