@@ -9,12 +9,12 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
-  background-color: black;
+  background: linear-gradient(to bottom, #0d1117, #1e272e);
 }
 
 nav {
   padding: 20px;
-  background-color: #333;
+  background: linear-gradient(to bottom, #0d1117, #1e272e);
 }
 
 .nav-link {

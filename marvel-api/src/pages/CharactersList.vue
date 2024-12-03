@@ -44,7 +44,7 @@
 
 <script>
 import axios from "axios";
-import CharacterCard from "../components/CharacterCard.vue"; // Componente CharacterCard
+import CharacterCard from "../components/CharacterCard.vue";
 import { debounce } from "lodash"; // Importamos debounce de lodash
 
 export default {

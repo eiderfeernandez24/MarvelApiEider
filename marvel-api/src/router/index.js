@@ -19,24 +19,24 @@ const routes = [
   {
     path: "/characters",
     name: "characters",
-    component: CharactersList, // Componente de personajes
+    component: CharactersList,
   },
   {
     path: "/character/:id",
     name: "characterDetails",
     component: CharacterDetails,
-    props: true, // Pasa los parámetros de la ruta como props al componente
+    props: true,
   },
   {
-    path: "/series", // Ruta para las series
+    path: "/series",
     name: "SeriesList",
-    component: SeriesList, // El componente que muestra la lista de series
+    component: SeriesList,
   },
   {
-    path: "/series/:seriesId/details", // Ruta para los detalles de la serie
+    path: "/series/:seriesId/details",
     name: "serieDetails",
-    component: SerieDetails, // Asegúrate de que este sea el componente correcto
-    props: true, // Pasa el parámetro `seriesId` como prop al componente
+    component: SerieDetails,
+    props: true,
   },
 ];
 

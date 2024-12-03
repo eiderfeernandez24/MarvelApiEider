@@ -2,7 +2,6 @@
   <div class="series-list">
     <h1>LISTA DE SERIES</h1>
     <div v-if="series.length">
-      <!-- Aplicamos el mismo diseño de tarjetas para las series -->
       <div class="series-card-container">
         <SeriesCard v-for="serie in series" :key="serie.id" :serie="serie" />
       </div>
