@@ -5,6 +5,9 @@
       alt="Comic image"
     />
     <h3>{{ comic.title }}</h3>
+    <router-link :to="'/comic-details/' + comic.id" class="btn btn-info">
+      Ver detalles
+    </router-link>
   </div>
 </template>
 
