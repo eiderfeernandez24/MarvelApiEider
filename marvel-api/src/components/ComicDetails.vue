@@ -1,65 +1,19 @@
 <template>
-  <div class="comic-details container">
-    <!-- Asegúrate de que 'comic' no sea null antes de intentar acceder a sus propiedades -->
-    <div v-if="comic">
-      <h1>{{ comic.title }}</h1>
-
-      <!-- Mostrar imagen del cómic -->
-      <img
-        v-if="comic.thumbnail && comic.thumbnail.path"
-        :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
-        alt="Comic image"
-        class="img-fluid"
-      />
-
-      <!-- Mostrar fecha de publicación -->
-      <p><strong>Published:</strong> {{ publicationDate }}</p>
-
-      <!-- Mostrar escritores -->
-      <p v-if="writers.length">
-        <strong>Writer:</strong> {{ writers.join(", ") }}
-      </p>
-
-      <!-- Mostrar dibujantes -->
-      <p v-if="pencillers.length">
-        <strong>Penciller:</strong> {{ pencillers.join(", ") }}
-      </p>
-
-      <!-- Mostrar portada -->
-      <p v-if="coverArtist.length">
-        <strong>Cover Artist:</strong> {{ coverArtist.join(", ") }}
-      </p>
-
-      <!-- Descripción del cómic -->
-      <p>{{ comic.description || "No description available" }}</p>
-
-      <!-- Botón de volver a la lista de cómics -->
-      <button @click="goBackToComicsList" class="btn btn-primary mt-4">
-        Back to Comics List
-      </button>
-    </div>
-
-    <!-- Mostrar un mensaje mientras los datos están cargando -->
-    <p v-else>Loading comic details...</p>
+  <div v-if="comic">
+    <h1>{{ comic.title }}</h1>
+    <p>{{ comic.description }}</p>
+    <!-- Display other comic details -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import md5 from "md5"; // Asegúrate de tener esta dependencia instalada
 
 export default {
   data() {
     return {
       comic: null,
-      writers: [],
-      pencillers: [],
-      coverArtist: [],
-      publicationDate: "",
-      publicKey: "40039a88658df0ebef4ab4763898ca93", // Tu clave pública
-      privateKey: "8e198fb531ca9c933681480119851a819f35a27d", // Tu clave privada
-      ts: new Date().getTime(),
-      hash: "",
+      comicId: this.$route.params.id, // Access the ID from the route
     };
   },
   created() {
@@ -68,73 +22,20 @@ export default {
   methods: {
     async fetchComicDetails() {
       try {
-        const comicId = this.$route.params.id;
-        const hash = this.generateHash();
-        console.log("hash", hash);
         const response = await axios.get(
-          `https://gateway.marvel.com/v1/public/comics/${comicId}`,
+          `https://gateway.marvel.com/v1/public/comics/${this.comicId}`,
           {
             params: {
               apikey: this.publicKey,
               ts: this.ts,
-              hash: hash,
+              hash: this.hash,
             },
           }
         );
-        console.log("response", response);
-
-        // Imprimir la respuesta completa para ver si los datos de los creadores están presentes
-        console.log(response.data);
-
-        // Acceder a los datos del cómic
-        if (response.data.data.results.length) {
-          const comicData = response.data.data.results[0];
-          this.comic = comicData;
-
-          // Obtener la fecha de publicación
-          const publicationInfo = comicData.dates.find(
-            (date) => date.type === "onsaleDate"
-          );
-          this.publicationDate = publicationInfo
-            ? new Date(publicationInfo.date).toLocaleDateString()
-            : "No date available";
-
-          // Verificar los creadores en la consola
-          console.log("Creators:", comicData.creators.items);
-
-          // Obtener los escritores, dibujantes y artistas de portada
-          this.writers = this.extractCreators(comicData, "writer");
-          this.pencillers = this.extractCreators(comicData, "penciller");
-          this.coverArtist = this.extractCreators(comicData, "cover");
-
-          console.log("Writers:", this.writers);
-          console.log("Pencillers:", this.pencillers);
-          console.log("Cover Artists:", this.coverArtist);
-        } else {
-          console.error("Comic not found");
-        }
+        this.comic = response.data.data.results[0];
       } catch (error) {
         console.error("Error fetching comic details:", error);
       }
-    },
-
-    extractCreators(comicData, role) {
-      // Verificar que los datos de creadores estén disponibles
-      if (comicData.creators && comicData.creators.items) {
-        return comicData.creators.items
-          .filter((item) => item.role === role)
-          .map((item) => item.name);
-      }
-      return []; // Retornar un array vacío si no hay creadores
-    },
-
-    generateHash() {
-      return md5(this.ts + this.privateKey + this.publicKey); // Generar el hash para la API
-    },
-
-    // Método para volver a la lista de cómics
-    goBackToComicsList() {
-      this.$router.push("/episodes");
     },
   },
 };

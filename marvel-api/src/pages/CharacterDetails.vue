@@ -15,7 +15,14 @@
       <h2>Comics:</h2>
       <ul class="comics-list">
         <li v-for="comic in character.comics.items" :key="comic.name">
-          <i class="comic-icon">📚</i> {{ comic.name }}
+          <i class="comic-icon">📚</i>
+          <router-link
+            :to="`/comicDetails/${comic.resourceURI.split('/').pop()}`"
+            class="comic-link"
+            @click="handleClick"
+          >
+            {{ comic.name }}
+          </router-link>
         </li>
       </ul>
     </div>
@@ -48,7 +55,6 @@ export default {
         const hash = this.generateHash();
         const characterId = this.$route.params.id;
 
-        // Petición a la API para obtener los detalles del personaje
         const response = await axios.get(
           `https://gateway.marvel.com/v1/public/characters/${characterId}`,
           {
@@ -59,7 +65,6 @@ export default {
             },
           }
         );
-
         this.character = response.data.data.results[0];
       } catch (error) {
         console.error("Error fetching character details:", error);
@@ -69,6 +74,10 @@ export default {
     generateHash() {
       const md5 = require("md5");
       return md5(this.ts + this.privateKey + this.publicKey);
+    },
+
+    handleClick() {
+      console.log("Comic link clicked!");
     },
   },
 };

@@ -4,7 +4,7 @@ import CharactersList from "@/pages/CharactersList.vue";
 import CharacterDetails from "@/pages/CharacterDetails.vue";
 import SeriesList from "@/pages/SeriesList.vue";
 import SerieDetails from "@/pages/SerieDetails.vue";
-import ComicDetails from "@/components/ComicDetails.vue";
+import ComicDetails from "@/pages/ComicDetails.vue";
 
 const routes = [
   {
@@ -40,7 +40,7 @@ const routes = [
     props: true,
   },
   {
-    path: "/comic-details/:id",
+    path: "/comicDetails/:id",
     name: "ComicDetails",
     component: ComicDetails,
     props: true,
