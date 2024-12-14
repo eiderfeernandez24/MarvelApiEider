@@ -6,10 +6,10 @@
     />
     <div class="series-info">
       <h3>{{ serie.title }}</h3>
-      <p v-if="serie.startYear">Año de inicio: {{ serie.startYear }}</p>
+      <!-- <p v-if="serie.startYear">Año de inicio: {{ serie.startYear }}</p>
       <p v-if="serie.description && serie.description.length > 0">
         {{ truncateDescription(serie.description) }}
-      </p>
+      </p> -->
       <p v-if="serie.comics.available">
         Comics disponibles: {{ serie.comics.available }}
       </p>

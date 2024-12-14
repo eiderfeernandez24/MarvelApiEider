@@ -7,7 +7,7 @@
       <div
         v-for="comic in comics"
         :key="comic.id"
-        class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 d-flex justify-content-center"
+        class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 d-flex justify-content-center"
       >
         <ComicCard :comic="comic" />
       </div>

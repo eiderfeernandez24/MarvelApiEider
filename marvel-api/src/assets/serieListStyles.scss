@@ -22,27 +22,26 @@
 }
 
 /* Ajustes responsivos utilizando media queries */
-@media (max-width: 1200px) {
-  .series-card-container {
-    grid-template-columns: repeat(
-      4,
-      1fr
-    ); /* 4 columnas en pantallas medianas */
-  }
-}
-
-@media (max-width: 900px) {
-  .series-card-container {
-    grid-template-columns: repeat(
-      3,
-      1fr
-    ); /* 3 columnas en pantallas pequeñas */
-  }
-}
-
 @media (max-width: 600px) {
   .series-card-container {
     grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
+  }
+
+  .series-card {
+    padding: 10px; /* Reducir el padding en las tarjetas */
+    font-size: 14px; /* Reducir el tamaño de fuente */
+  }
+
+  .series-card-title {
+    font-size: 16px; /* Reducir tamaño del título */
+    white-space: nowrap; /* Evitar que el texto salte a otra línea */
+    overflow: hidden; /* Ocultar texto desbordado */
+    text-overflow: ellipsis; /* Añadir puntos suspensivos si hay desbordamiento */
+  }
+
+  .series-card-button {
+    font-size: 14px; /* Ajustar tamaño del botón */
+    padding: 5px 10px; /* Reducir padding en el botón */
   }
 }
 
@@ -50,7 +49,21 @@
   .series-card-container {
     grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
   }
+
+  .series-card {
+    padding: 8px; /* Aún menos padding */
+  }
+
+  .series-card-title {
+    font-size: 14px; /* Reducir más el tamaño del título */
+  }
+
+  .series-card-button {
+    font-size: 12px; /* Tamaño más pequeño para el botón */
+    padding: 4px 8px;
+  }
 }
+
 
 .load-more-btn {
   margin-top: 20px;
