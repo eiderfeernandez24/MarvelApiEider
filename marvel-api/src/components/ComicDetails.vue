@@ -1,8 +1,53 @@
 <template>
-  <div v-if="comic">
-    <h1>{{ comic.title }}</h1>
-    <p>{{ comic.description }}</p>
-    <!-- Display other comic details -->
+  <div class="comic-details container mt-5" v-if="comic">
+    <div class="comic-details-wrapper">
+      <h1 class="text-center mb-4">{{ comic.title }}</h1>
+      <div class="row">
+        <div class="col-md-5 text-center">
+          <img
+            :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+            :alt="comic.title"
+            class="comic-image img-fluid"
+          />
+        </div>
+        <div class="col-md-7">
+          <!-- Descripción del cómic -->
+          <div v-if="comic.description" class="comic-description">
+            <h3>{{ $t("comicDetails.descriptionTitle") }}</h3>
+            <p>{{ comic.description }}</p>
+          </div>
+          <div v-else class="no-description">
+            <h3>{{ $t("comicDetails.descriptionTitle") }}</h3>
+            <p>{{ $t("comicDetails.noDescription") }}</p>
+          </div>
+
+          <!-- Creadores -->
+          <div v-if="comic.creators.items.length" class="comics-section">
+            <h2>{{ $t("comicDetails.creatorsTitle") }}</h2>
+            <ul class="comics-list">
+              <li v-for="creator in comic.creators.items" :key="creator.name">
+                <i class="comic-icon">✏️</i>
+                <strong>{{ creator.name }}</strong> - {{ creator.role }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Botón para volver a la lista de cómics -->
+          <router-link to="/episodes" class="back-btn">
+            {{ $t("comicDetails.backToList") }}
+          </router-link>
+
+          <!-- Nuevo botón para volver al personaje de origen -->
+          <router-link
+            v-if="originCharacterId"
+            :to="'/characterDetails/' + originCharacterId"
+            class="back-to-character-btn"
+          >
+            {{ $t("comicDetails.backToCharacter") }}
+          </router-link>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,142 +58,57 @@ export default {
   data() {
     return {
       comic: null,
-      comicId: this.$route.params.id, // Access the ID from the route
+      originCharacterId: null, // ID del personaje desde el cual llegamos
+      publicKey: "40039a88658df0ebef4ab4763898ca93",
+      privateKey: "8e198fb531ca9c933681480119851a819f35a27d",
+      ts: new Date().getTime(),
+      hash: "",
     };
   },
   created() {
     this.fetchComicDetails();
+    this.setOriginCharacterId();
   },
   methods: {
     async fetchComicDetails() {
       try {
+        const hash = this.generateHash();
+        const comicId = this.$route.params.id;
+
         const response = await axios.get(
-          `https://gateway.marvel.com/v1/public/comics/${this.comicId}`,
+          `https://gateway.marvel.com/v1/public/comics/${comicId}`,
           {
             params: {
               apikey: this.publicKey,
               ts: this.ts,
-              hash: this.hash,
+              hash: hash,
             },
           }
         );
+
         this.comic = response.data.data.results[0];
       } catch (error) {
         console.error("Error fetching comic details:", error);
       }
+    },
+
+    // Método para obtener el ID del personaje desde la ruta
+    setOriginCharacterId() {
+      // Verificamos si la URL contiene el ID del personaje
+      const characterId = this.$route.query.characterId; // Esperamos que se pase el ID del personaje en los parámetros de la URL
+      if (characterId) {
+        this.originCharacterId = characterId;
+      }
+    },
+
+    generateHash() {
+      const md5 = require("md5");
+      return md5(this.ts + this.privateKey + this.publicKey);
     },
   },
 };
 </script>
 
 <style scoped>
-/* General */
-.comic-details {
-  padding: 30px 15px;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Título */
-.comic-details h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-  text-transform: uppercase;
-}
-
-/* Imagen del cómic */
-.comic-details img {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px 0;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Detalles del cómic */
-.comic-details p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 12px;
-}
-
-.comic-details p strong {
-  font-weight: bold;
-  color: #333;
-}
-
-/* Sección de descripción */
-.comic-details p:last-of-type {
-  font-size: 1.2rem;
-  font-style: italic;
-  color: #777;
-  margin-top: 30px;
-  padding-top: 10px;
-  border-top: 1px solid #ddd;
-}
-
-/* Estilos para la lista de creadores */
-.comic-details p {
-  padding-left: 15px;
-}
-
-.comic-details p:before {
-  content: "• ";
-  color: #007bff; /* Color del icono de la lista */
-}
-
-/* Fondo y sombra del contenedor */
-.comic-details {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Botón de Volver */
-.comic-details .btn {
-  display: block;
-  width: 100%;
-  font-size: 1.2rem;
-  padding: 12px;
-  text-align: center;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.comic-details .btn:hover {
-  background-color: #0056b3;
-}
-
-/* Resposive para pantallas pequeñas */
-@media (max-width: 768px) {
-  .comic-details {
-    padding: 20px;
-  }
-
-  .comic-details h1 {
-    font-size: 2rem;
-  }
-
-  .comic-details p {
-    font-size: 1rem;
-  }
-
-  .comic-details img {
-    max-width: 100%;
-  }
-}
+@import url(../assets/comicDetailsStyles.scss);
 </style>

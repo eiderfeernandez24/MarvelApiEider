@@ -8,7 +8,7 @@
     />
 
     <div v-if="creators.length" class="creators-section">
-      <h2>Creadores:</h2>
+      <h2>{{ $t("serieDetails.creators") }}:</h2>
       <ul class="creators-list">
         <li v-for="creator in creators" :key="creator">
           {{ creator }}
@@ -16,9 +16,11 @@
       </ul>
     </div>
 
-    <router-link to="/series" class="back-btn">Volver a la lista</router-link>
+    <router-link to="/series" class="back-btn">{{
+      $t("serieDetails.backToList")
+    }}</router-link>
   </div>
-  <p v-else class="loading">Cargando detalles de la serie...</p>
+  <p v-else class="loading">{{ $t("serieDetails.loading") }}</p>
 </template>
 
 <script>
@@ -27,16 +29,16 @@ import axios from "axios";
 export default {
   data() {
     return {
-      serie: null, // Información de la serie
-      creators: [], // Lista de creadores
+      serie: null,
+      creators: [],
     };
   },
   created() {
-    this.fetchSerieDetails(); // Obtener detalles de la serie al cargar el componente
+    this.fetchSerieDetails();
   },
   methods: {
     async fetchSerieDetails() {
-      const seriesId = this.$route.params.seriesId; // Obtener el ID de la serie desde los parámetros de la URL
+      const seriesId = this.$route.params.seriesId;
       const publicKey = "40039a88658df0ebef4ab4763898ca93";
       const privateKey = "8e198fb531ca9c933681480119851a819f35a27d";
       const ts = new Date().getTime();
@@ -57,7 +59,6 @@ export default {
         const serieData = response.data.data.results[0];
         this.serie = serieData;
 
-        // Obtener los creadores de la serie
         if (serieData.creators && serieData.creators.items.length > 0) {
           this.creators = serieData.creators.items.map(
             (creator) => creator.name
@@ -69,7 +70,7 @@ export default {
     },
     generateHash(ts, privateKey, publicKey) {
       const md5 = require("md5");
-      return md5(ts + privateKey + publicKey); // Generar hash para la autenticación
+      return md5(ts + privateKey + publicKey);
     },
   },
 };

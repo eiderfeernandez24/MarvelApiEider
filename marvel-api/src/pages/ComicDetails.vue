@@ -11,17 +11,19 @@
           />
         </div>
         <div class="col-md-7">
+          <!-- Descripción -->
           <!-- <div v-if="comic.description" class="comic-description">
-            <h3>Descripción:</h3>
+            <h3>{{ $t("comicDetails.descriptionTitle") }}</h3>
             <p>{{ comic.description }}</p>
           </div>
           <div v-else class="no-description">
-            <h3>Descripción:</h3>
-            <p>No hay descripción disponible.</p>
+            <h3>{{ $t("comicDetails.descriptionTitle") }}</h3>
+            <p>{{ $t("comicDetails.noDescription") }}</p>
           </div> -->
 
+          <!-- Creadores -->
           <div v-if="comic.creators.items.length" class="comics-section">
-            <h2>Creadores:</h2>
+            <h2>{{ $t("comicDetails.creatorsTitle") }}</h2>
             <ul class="comics-list">
               <li v-for="creator in comic.creators.items" :key="creator.name">
                 <i class="comic-icon">✏️</i>
@@ -30,9 +32,10 @@
             </ul>
           </div>
 
-          <router-link to="/episodes" class="back-btn"
-            >Volver a la lista</router-link
-          >
+          <!-- Botón para volver a la lista -->
+          <router-link to="/episodes" class="back-btn">
+            {{ $t("comicDetails.backToList") }}
+          </router-link>
         </div>
       </div>
     </div>

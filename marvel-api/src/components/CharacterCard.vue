@@ -13,7 +13,7 @@
       :to="{ name: 'characterDetails', params: { id: character.id } }"
       class="btn-details"
     >
-      Ver detalles
+      {{ $t("characterCard.viewDetails") }}
     </router-link>
   </div>
 </template>

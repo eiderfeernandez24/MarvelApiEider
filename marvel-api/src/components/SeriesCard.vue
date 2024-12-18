@@ -6,18 +6,18 @@
     />
     <div class="series-info">
       <h3>{{ serie.title }}</h3>
-      <!-- <p v-if="serie.startYear">Año de inicio: {{ serie.startYear }}</p>
-      <p v-if="serie.description && serie.description.length > 0">
-        {{ truncateDescription(serie.description) }}
-      </p> -->
+
       <p v-if="serie.comics.available">
-        Comics disponibles: {{ serie.comics.available }}
+        {{
+          $t("seriesCard.comicsAvailable", { count: serie.comics.available })
+        }}
       </p>
+
       <router-link
         :to="{ name: 'serieDetails', params: { seriesId: serie.id } }"
         class="view-details-btn"
       >
-        Ver detalles
+        {{ $t("seriesCard.viewDetails") }}
       </router-link>
     </div>
   </div>

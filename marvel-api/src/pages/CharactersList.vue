@@ -1,6 +1,6 @@
 <template>
   <div class="character-list">
-    <h1>LISTA DE PERSONAJES</h1>
+    <h1>{{ $t("characterList.title") }}</h1>
 
     <!-- Campo de búsqueda -->
     <div>
@@ -8,37 +8,37 @@
         type="text"
         v-model="searchTerm"
         @input="debouncedSearch"
-        placeholder="Buscar personaje"
+        :placeholder="$t('characterList.searchPlaceholder')"
         class="search-input"
       />
     </div>
 
     <div v-if="filteredCharacters.length">
-      <div
-        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4"
-      >
+      <div class="row g-4">
         <!-- Cada tarjeta de personaje -->
         <div
           v-for="character in filteredCharacters"
           :key="character.id"
-          class="col d-flex justify-content-center"
+          class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center"
         >
           <CharacterCard :character="character" />
         </div>
       </div>
     </div>
 
-    <p v-else>Cargando personajes...</p>
+    <p v-else>{{ $t("characterList.loading") }}</p>
 
     <button
       v-if="hasNextPage"
       @click="loadMoreCharacters"
       class="load-more-btn"
     >
-      Cargar más personajes
+      {{ $t("characterList.loadMore") }}
     </button>
 
-    <router-link to="/" class="load-more-btn"> Volver al Inicio </router-link>
+    <router-link to="/" class="load-more-btn">{{
+      $t("characterList.backToHome")
+    }}</router-link>
   </div>
 </template>
 
@@ -128,4 +128,80 @@ export default {
 
 <style scoped>
 @import url(../assets/characterListStyles.scss);
+
+/* CSS para asegurar que las tarjetas no se vean aplastadas */
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se distribuyan en múltiples filas */
+  justify-content: space-between; /* Asegura que las tarjetas tengan espacio entre ellas */
+}
+
+.character-card {
+  background-color: #1e272e; /* Fondo oscuro para las tarjetas */
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.character-card img {
+  width: 100%;
+  height: auto; /* Ajustar la altura de la imagen para mantener la proporción */
+  object-fit: cover;
+  border-radius: 10px 10px 0 0; /* Bordes redondeados superiores */
+  transition: transform 0.3s ease;
+}
+
+.character-card img:hover {
+  transform: scale(1.05); /* Efecto zoom al pasar el ratón sobre la imagen */
+}
+
+.character-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffdd57; /* Color amarillo para destacar */
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.character-card p {
+  color: #ccc; /* Texto gris claro */
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Asegurar que las tarjetas no se estiren o se hagan pequeñas */
+.col-12,
+.col-sm-6,
+.col-md-4,
+.col-lg-3,
+.col-xl-2 {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* Asegura que las tarjetas no se estiren en exceso */
+}
+
+.col-12.col-sm-6.col-md-4.col-lg-3 {
+  flex: 1 1 20%; /* Evitar que las tarjetas se hagan demasiado pequeñas */
+}
+
+/* MEDIA QUERIES PARA DISPOSITIVOS MÓVILES Y PEQUEÑAS PANTALLAS */
+
+/* En pantallas de 500px o menos, se deben mostrar una tarjeta por fila */
+@media (max-width: 500px) {
+  .row {
+    display: block; /* Las tarjetas se apilan en lugar de distribuirse en fila */
+  }
+
+  .col-12 {
+    margin-bottom: 20px; /* Espaciado entre las tarjetas */
+  }
+}
 </style>

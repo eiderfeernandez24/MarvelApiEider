@@ -9,10 +9,12 @@
     <p v-if="character.description" class="character-description">
       {{ character.description }}
     </p>
-    <p v-else class="no-description">No hay descripción disponible.</p>
+    <p v-else class="no-description">
+      {{ $t("characterDetails.noDescription") }}
+    </p>
 
     <div v-if="character.comics.items.length" class="comics-section">
-      <h2>Comics:</h2>
+      <h2>{{ $t("characterDetails.comics") }}:</h2>
       <ul class="comics-list">
         <li v-for="comic in character.comics.items" :key="comic.name">
           <i class="comic-icon">📚</i>
@@ -27,9 +29,9 @@
       </ul>
     </div>
 
-    <router-link to="/characters" class="back-btn"
-      >Volver a la lista</router-link
-    >
+    <router-link to="/characters" class="back-btn">
+      {{ $t("characterDetails.backToList") }}
+    </router-link>
   </div>
 </template>
 

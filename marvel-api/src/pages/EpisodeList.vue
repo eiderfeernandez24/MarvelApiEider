@@ -1,6 +1,6 @@
 <template>
   <div class="comic-list container-fluid py-4">
-    <h1 class="text-center mb-4">LISTA DE CÓMICS</h1>
+    <h1 class="text-center mb-4">{{ $t("episodes.listTitle") }}</h1>
 
     <div v-if="comics.length" class="row g-3">
       <!-- Cada tarjeta de cómic -->
@@ -13,7 +13,9 @@
       </div>
     </div>
 
-    <p v-else class="text-center text-white">Cargando cómics...</p>
+    <p v-else class="text-center text-white">
+      {{ $t("episodes.loadingComics") }}
+    </p>
 
     <!-- Botones -->
     <div class="d-flex justify-content-center mt-4 gap-3">
@@ -22,11 +24,11 @@
         @click="loadMoreComics"
         class="load-more-btn btn btn-primary"
       >
-        Cargar más cómics
+        {{ $t("episodes.loadMore") }}
       </button>
 
       <router-link to="/" class="load-more-btn btn btn-secondary">
-        Volver al Inicio
+        {{ $t("episodes.backToHome") }}
       </router-link>
     </div>
   </div>

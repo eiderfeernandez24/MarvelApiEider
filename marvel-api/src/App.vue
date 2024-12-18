@@ -7,6 +7,16 @@
       class="marvel-logo d-block mx-auto mt-3 mb-4"
     />
 
+    <!-- Botones para cambiar idioma -->
+    <div class="language-switcher">
+      <button @click="switchLanguage('es')" class="language-button">
+        Español
+      </button>
+      <button @click="switchLanguage('en')" class="language-button">
+        English
+      </button>
+    </div>
+
     <router-view />
 
     <footer>
@@ -14,17 +24,13 @@
         <div class="footer-content row">
           <!-- Sección sobre nosotros -->
           <div class="footer-left col-12 col-md-4 mb-4 mb-md-0">
-            <h3>Sobre Nosotros</h3>
-            <p>
-              Esta página está dedicada a todos los fans del universo Marvel,
-              con el objetivo de explorar los creadores y episodios que dieron
-              vida a los héroes más icónicos.
-            </p>
+            <h3>{{ $t("footer.aboutUs") }}</h3>
+            <p>{{ $t("footer.aboutDescription") }}</p>
           </div>
 
           <!-- Sección redes sociales -->
           <div class="footer-center col-12 col-md-4 text-center mb-4 mb-md-0">
-            <h3>Redes Sociales</h3>
+            <h3>{{ $t("footer.socialMedia") }}</h3>
             <div class="social-icons">
               <a
                 href="https://facebook.com"
@@ -51,25 +57,36 @@
 
           <!-- Sección contacto -->
           <div class="footer-right col-12 col-md-4 text-center mb-4 mb-md-0">
-            <h3>Contacto</h3>
-            <p><i class="fa fa-envelope"></i> contacto@marvelfans.com</p>
+            <h3>{{ $t("footer.contact") }}</h3>
             <p>
-              <i class="fa fa-map-marker-alt"></i> Universo Marvel, Multiverso
+              <i class="fa fa-envelope"></i> {{ $t("footer.contactEmail") }}
+            </p>
+            <p>
+              <i class="fa fa-map-marker-alt"></i>
+              {{ $t("footer.contactAddress") }}
             </p>
           </div>
         </div>
 
         <!-- Parte inferior del footer -->
         <div class="footer-bottom text-center mt-4">
-          <p>
-            © 2024 Creado por Eider Fernández Crespo. Todos los derechos
-            reservados.
-          </p>
+          <p>{{ $t("footer.copyright") }}</p>
         </div>
       </div>
     </footer>
   </div>
 </template>
+
+<script>
+export default {
+  name: "App",
+  methods: {
+    switchLanguage(language) {
+      this.$i18n.locale = language; // Cambiar el idioma
+    },
+  },
+};
+</script>
 
 <style scoped>
 #app {
@@ -80,23 +97,23 @@
   overflow: hidden;
 }
 
-nav {
-  padding: 20px;
-  background: linear-gradient(to bottom, #0d1117, #1e272e);
+.language-switcher {
+  margin: 10px 0;
 }
 
-.nav-link {
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-  padding: 10px;
-  margin: 0 10px;
+.language-button {
+  background-color: #42b983;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
   border-radius: 5px;
 }
 
-.nav-link:hover {
-  background-color: #42b983;
-  color: white;
+.language-button:hover {
+  background-color: #36a373;
 }
 
 footer {
@@ -123,11 +140,10 @@ footer {
 
 .footer-right {
   text-align: center;
-}
-
-.footer-right p {
-  text-align: center; /* Asegura que los párrafos dentro de la sección 'contacto' estén centrados */
-  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .social-icons {

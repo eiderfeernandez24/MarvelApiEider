@@ -6,7 +6,7 @@
     />
     <h3>{{ comic.title }}</h3>
     <router-link :to="'/ComicDetails/' + comic.id" class="btn btn-info">
-      Ver detalles
+      {{ $t("comicCard.viewDetails") }}
     </router-link>
   </div>
 </template>
