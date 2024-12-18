@@ -13,6 +13,7 @@
       />
     </div>
 
+    <!-- Lista de personajes -->
     <div v-if="filteredCharacters.length">
       <div class="row g-4">
         <!-- Cada tarjeta de personaje -->
@@ -26,16 +27,19 @@
       </div>
     </div>
 
+    <!-- Mensaje cuando no hay personajes -->
     <p v-else>{{ $t("characterList.loading") }}</p>
 
+    <!-- Botón "Cargar más" (se oculta si hay una búsqueda activa) -->
     <button
-      v-if="hasNextPage"
+      v-if="!searchTerm && hasNextPage"
       @click="loadMoreCharacters"
       class="load-more-btn"
     >
       {{ $t("characterList.loadMore") }}
     </button>
 
+    <!-- Enlace para volver al inicio -->
     <router-link to="/" class="load-more-btn">{{
       $t("characterList.backToHome")
     }}</router-link>

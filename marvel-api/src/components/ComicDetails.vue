@@ -37,13 +37,9 @@
             {{ $t("comicDetails.backToList") }}
           </router-link>
 
-          <!-- Nuevo botón para volver al personaje de origen -->
-          <router-link
-            v-if="originCharacterId"
-            :to="'/characterDetails/' + originCharacterId"
-            class="back-to-character-btn"
-          >
-            {{ $t("comicDetails.backToCharacter") }}
+          <!-- Botón para volver a la lista de cómics -->
+          <router-link to="/characters" class="back-btn">
+            {{ $t("comicDetails.backToList") }}
           </router-link>
         </div>
       </div>
