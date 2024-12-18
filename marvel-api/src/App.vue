@@ -10,10 +10,18 @@
     <!-- Botones para cambiar idioma -->
     <div class="language-switcher">
       <button @click="switchLanguage('es')" class="language-button">
-        Español
+        <img
+          src="https://th.bing.com/th/id/R.1eea68ff9050ba013cf554ea4f6f7fa1?rik=gd%2b2cXkEHRwN%2fg&riu=http%3a%2f%2fwww.pngall.com%2fwp-content%2fuploads%2f2016%2f05%2fSpain-Flag.png&ehk=a5gp9MdULAuhoyyi5mEUfhs5EdglaAWNm%2f6e0u4VoE8%3d&risl=&pid=ImgRaw&r=0"
+          alt="Español"
+          class="flag-icon"
+        />
       </button>
       <button @click="switchLanguage('en')" class="language-button">
-        English
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/001/176/889/non_2x/flag-of-england-background-vector.jpg"
+          alt="English"
+          class="flag-icon"
+        />
       </button>
     </div>
 
@@ -89,6 +97,7 @@ export default {
 </script>
 
 <style scoped>
+/* Fondo de pantalla */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
@@ -97,30 +106,72 @@ export default {
   overflow: hidden;
 }
 
+/* Animación de entrada para el logo */
+.marvel-logo {
+  animation: fadeInLogo 1.5s ease-out;
+}
+
+/* Botones para cambiar idioma, ubicados en la esquina superior derecha */
 .language-switcher {
-  margin: 10px 0;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .language-button {
-  background-color: #42b983;
-  color: white;
+  background-color: transparent;
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   margin: 0 5px;
-  font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .language-button:hover {
-  background-color: #36a373;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(66, 185, 131, 0.6);
 }
 
+.flag-icon {
+  width: 30px;
+  height: 20px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.language-button:hover .flag-icon {
+  transform: rotate(10deg);
+}
+
+/* Animación para los íconos de redes sociales */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.social-link {
+  color: #fff;
+  margin: 0 10px;
+  font-size: 1.5rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-link:hover {
+  color: #42b983;
+  transform: rotate(360deg);
+}
+
+/* Animación de aparición del footer */
 footer {
   background-color: #1e272e;
   color: #fff;
   padding: 20px 0;
   width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInFooter 1s forwards 0.5s;
 }
 
 .footer-content {
@@ -146,24 +197,31 @@ footer {
   align-items: center;
 }
 
-.social-icons {
-  display: flex;
-  justify-content: center;
-}
-
-.social-link {
-  color: #fff;
-  margin: 0 10px;
-  font-size: 1.5rem;
-  transition: color 0.3s;
-}
-
-.social-link:hover {
-  color: #42b983;
-}
-
 .footer-bottom {
   font-size: 0.9rem;
   text-align: center;
+}
+
+/* Animaciones definidas */
+@keyframes fadeInLogo {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFooter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
