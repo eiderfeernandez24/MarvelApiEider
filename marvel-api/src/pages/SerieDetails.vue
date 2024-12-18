@@ -16,6 +16,17 @@
       </ul>
     </div>
 
+    <div v-if="comics.length" class="comics-section">
+      <h2>Lista de cómics:</h2>
+      <ul class="comics-list">
+        <li v-for="comic in comics" :key="comic.id" class="comic-item">
+          <router-link :to="`/comicDetails/${comic.id}`" class="comic-link">
+            {{ comic.title }}
+          </router-link>
+        </li>
+      </ul>
+    </div>
+
     <router-link to="/series" class="back-btn">{{
       $t("serieDetails.backToList")
     }}</router-link>
@@ -31,6 +42,7 @@ export default {
     return {
       serie: null,
       creators: [],
+      comics: [],
     };
   },
   created() {
@@ -64,9 +76,20 @@ export default {
             (creator) => creator.name
           );
         }
+
+        // Fetch associated comics
+        if (serieData.comics && serieData.comics.items.length > 0) {
+          this.comics = serieData.comics.items.map((comic) => ({
+            id: this.extractIdFromUri(comic.resourceURI),
+            title: comic.name,
+          }));
+        }
       } catch (error) {
         console.error("Error fetching serie details:", error);
       }
+    },
+    extractIdFromUri(uri) {
+      return uri.split("/").pop(); // Extracts the ID from the resource URI
     },
     generateHash(ts, privateKey, publicKey) {
       const md5 = require("md5");
